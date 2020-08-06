@@ -1,4 +1,4 @@
-package com.m3support.service;
+package com.m3support.demo.service;
 
 public interface ReportService {
 

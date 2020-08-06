@@ -1,4 +1,4 @@
-package com.m3support.entity;
+package com.m3support.demo.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "account_master")
@@ -28,11 +30,18 @@ public class Account {
 	@Column(name = "account_desc")
 	private String accountDesc;
 	
-	@OneToMany(mappedBy = "account_master",
+	@OneToMany(mappedBy = "account_master", 
 	cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Project> projects = new HashSet<>();
+	private Set<Project> project = new HashSet<>();
 	
-
+	@OneToMany(mappedBy = "account_master", 
+	cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Report> report = new HashSet<>();
+	
+	@OneToMany(mappedBy = "account_master", 
+	cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Account_Project_Employee> ape = new HashSet<>();
+	
 	//Account default constructor
 	public Account() {
 		
@@ -88,13 +97,13 @@ public class Account {
 	@Override
 	public String toString() {
 		
-	return "Account{" +
+	return "Accounts {" +
 	
                 "Account Id = " + id +
                 
                 ", Reporting Manager = '" + reportingManager + '\'' +
                 
-                ", Account Des c='" + accountDesc + '\'' + 
+                ", Account Desc ='" + accountDesc + '\'' + 
                                 
                 '}';
 		
@@ -103,3 +112,5 @@ public class Account {
 	 
 
 }
+
+

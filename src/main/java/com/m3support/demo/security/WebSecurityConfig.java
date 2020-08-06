@@ -1,4 +1,4 @@
-package com.m3support.security;
+package com.m3support.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
