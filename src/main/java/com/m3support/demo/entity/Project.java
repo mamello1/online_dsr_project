@@ -1,19 +1,15 @@
+
+
 package com.m3support.demo.entity;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,93 +19,68 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "project_id")
-	private Long id;
+	private int project_id;
 	
-	@Column(name = "reporting_manager")
-	private String reportingManager;
 	
 	@Column(name = "project_desc")
-	private String projectDesc;
+	private String project_desc;
 	
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
-    
-    @OneToMany(mappedBy = "project_master", 
-    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Report> report = new HashSet<>();
-    		
-    @OneToMany(mappedBy = "project_master", 
-    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Account_Project_Employee> ape = new HashSet<>();
-    		
-		
+
+	@Column(name = "reporting_manager")
+	private String reporting_manager;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "account_id", referencedColumnName = "account_id")
+	private Account account_master;
+	
+	
 	//Account default constructor
 	public Project() {
 		
 	}
-	
-	//Account constructor to access private variables
-	public Project(Long id,String reportingManager,String projectDesc) {
-		
-		this.id = id;
-		this.reportingManager = reportingManager;
-		this.projectDesc = projectDesc;
+
+
+	public Project(int project_id, String project_desc,String reporting_manager) {
+		this.project_id = project_id;
+		this.project_desc = project_desc;
+		this.reporting_manager = reporting_manager;
+
 	}
-	
-	
-	//Set method for project id.
-	public void setId(Long id) {
-		
-		this.id = id;
+
+
+	public int getProject_id() {
+		return project_id;
 	}
-	
-	
-	//Get method for project id.
-	public Long getId() {
-		
-		return id;
+
+
+	public void setProject_id(int project_id) {
+		this.project_id = project_id;
 	}
-	
-	//Set method for reporting manager.
-	public void setReportingManager(String reportingManager) {
-				
-		this.reportingManager = reportingManager;		
+
+
+	public String getProject_desc() {
+		return project_desc;
 	}
-						
-	//Get method for reporting manager.
-	public String getReportingManager() {
-				
-		return reportingManager;		
+
+
+	public void setProject_desc(String project_desc) {
+		this.project_desc = project_desc;
 	}
-						
-	//Set method for project description.
-	public void setProjectDesc(String projectDesc) {
-			
-		this.projectDesc = projectDesc;		
+
+	public String getReporting_manager() {
+		return reporting_manager;
 	}
-				
-	//Get method for project description.
-	public String getProjectDesc() {
-			
-	return projectDesc;	
+
+	public void setReporting_manager(String reporting_manager) {
+		this.reporting_manager = reporting_manager;
 	}
-		
 	
 	@Override
 	public String toString() {
-		
-	return "Project{" +
-	
-                "Project Id = " + id +
-                
-                ", Reporting Manager = '" + reportingManager + '\'' +
-                
-                ", Project Desc='" + projectDesc + '\'' + 
-                                
-                '}';
-		
+		return "Project [project_id=" + project_id + ", project_desc=" + project_desc + ",reporting_manager=" + reporting_manager + "]";
 	}
 	
-
+	
 }
+
