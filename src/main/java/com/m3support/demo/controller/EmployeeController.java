@@ -29,7 +29,7 @@ public class EmployeeController {
 	}
 	
 	
-	//Method to retrieve an employees submitted reports by their employee id.
+	//Method to for a manager to retrieve a specific employees submitted reports by their employee id.
 	@GetMapping("/employee/{emp_psid}")
 	public List<Report> getDSROfSpecificEmployee(@PathVariable int emp_psid){
 			 

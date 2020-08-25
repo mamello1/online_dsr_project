@@ -21,6 +21,9 @@ public interface ReportRepository extends JpaRepository<Report,ReportId>{
 	
 	@Query("SELECT rep FROM Report rep WHERE rep.submission_date =?1")
 	List<Report> generateDSRReport(Date currentDate);
+	
+	@Query("SELECT rep from Report rep where rep.project_id.project_id = ?1 ")
+	List<Report> getEmployeesDSRUnderProjects(int project_id);
 
 	
 	

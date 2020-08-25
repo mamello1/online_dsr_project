@@ -8,10 +8,7 @@ import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
@@ -32,7 +29,6 @@ public class ReportServiceImplementation implements ReportService{
 	
 	//Method to retrieve all employees submitted reports.
 	@Override
-	@GetMapping("/employee")
 	public List<Report> getAllDSRReports(){
 		
 		return reportRepository.findAll();
@@ -40,7 +36,6 @@ public class ReportServiceImplementation implements ReportService{
 		
 	//Method to retrieve an employees submitted reports by their psid.
 	 @Override
-	 @GetMapping("/employee/{emp_psid}")
 	 public List<Report> getDSROfSpecificEmployee(@PathVariable int emp_psid){
 		 
 		 return reportRepository.getDSROfSpecificEmployee(emp_psid);
@@ -49,7 +44,6 @@ public class ReportServiceImplementation implements ReportService{
 	 
 	//Method to retrieve an employees submitted reports by their psid and specific range.
 	@Override
-	@GetMapping("/employee/{emp_psid}/{startDate}/{endDate}")
 	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable int emp_psid,Date startDate,Date endDate){
 			 
 		return reportRepository.getDSROfSpecificEmployeeByDateRange(emp_psid,startDate,endDate);
@@ -59,7 +53,6 @@ public class ReportServiceImplementation implements ReportService{
 	
 	//Method that allows an employee to submit their daily report.
 	@Override
-	@PostMapping("/employee")
 	public void createDSR(Report report) {
 			 
 		 this.reportRepository.save(report);
@@ -73,7 +66,7 @@ public class ReportServiceImplementation implements ReportService{
 		
 		Document document = new Document(PageSize.A4);
 		
-		String fileLocation = "C:\\Users\\Mamello Mitane\\Desktop\\ITC_Daily_Reports\\dsr_reports.pdf";
+		String fileLocation = "dsr_report.pdf";
 		
 		PdfWriter.getInstance(document, new FileOutputStream(fileLocation));
 		document.open();
@@ -86,10 +79,13 @@ public class ReportServiceImplementation implements ReportService{
 		addTableHeader(table);
 		addRows(table, generateDSRReport); 
 		document.add(table);
+		
+		Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler" + fileLocation);
 		document.close();
 		
-		return "PDF File Has Successfully Been Extracted and Saved At The Following Location : " + fileLocation;	
-       }
+		return "PDF File Has Successfully Been Extracted and Saved At The Following Location : " + fileLocation;
+		
+      }
 	
 	
 
@@ -127,6 +123,14 @@ public class ReportServiceImplementation implements ReportService{
 	}
  
 		}
+	
+	
+	@Override
+	public List<Report> getEmploeyeeDSRUnderProjects(int project_id) {
+		
+		return reportRepository.getEmployeesDSRUnderProjects(project_id);
+			
+	}
 
 	}	
 
