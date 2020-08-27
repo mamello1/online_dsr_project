@@ -53,13 +53,12 @@ public class ReportServiceImplementation implements ReportService{
 	
 	//Method that allows an employee to submit their daily report.
 	@Override
-	public void createDSR(Report report) {
+	public String createDSR(Report report) {
 		
-		report.setAccount_id(report.getAccount_id());
-		report.setEmp_psid(report.getEmp_psid());
-		report.setProject_id(report.getProject_id());
 			 
 		 this.reportRepository.save(report);
+		 
+		 return "Report Has Been Successfully Created & Submited.";
 		 
 	}
 	

@@ -20,7 +20,7 @@ public interface ReportService {
 	List<Report> getEmploeyeeDSRUnderProjects(int project_id);
 	
 	//Method that allows an employee to submit their daily report.
-	void createDSR(Report report);
+	public String createDSR(Report report);
 	
 	//Method that allows a manager to generate a report.
 	public String generateDSRReport(Date currentDate) throws Exception;

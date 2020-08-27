@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.m3support.demo.entity.SMTPMailSender;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class HomeController {
@@ -23,8 +23,8 @@ public class HomeController {
 	@Autowired
 	private SMTPMailSender smtpMailSender;
 	
-	LocalTime alertTime = LocalTime.of(10, 49);
-	LocalTime alertTerminationTime = LocalTime.of(10, 50);
+	LocalTime alertTime = LocalTime.of(10,49);
+	LocalTime alertTerminationTime = LocalTime.of(10,50);
 	@Scheduled(fixedRate = 40000)
 	public void ScheduledMailSender() throws MessagingException{
 		

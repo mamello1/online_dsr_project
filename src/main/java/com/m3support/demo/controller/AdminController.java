@@ -17,7 +17,7 @@ import com.m3support.demo.service.AccountService;
 import com.m3support.demo.service.ProjectService;
 import com.m3support.demo.service.ReportService;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class AdminController {

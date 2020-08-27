@@ -49,6 +49,7 @@ public class Report {
 
 	public Report(Account account_id, Project project_id, Employee emp_psid, String task_completed, String task_planned,
 			String task_issues, Date submission_date) {
+		
 		this.account_id = account_id;
 		this.project_id = project_id;
 		this.emp_psid = emp_psid;

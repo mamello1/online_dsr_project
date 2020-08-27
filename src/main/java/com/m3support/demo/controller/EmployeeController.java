@@ -15,15 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.m3support.demo.entity.Report;
 import com.m3support.demo.service.ReportService;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
 	
 	@Autowired
 	ReportService reportService;
-			
-	
+				
 	//Method to retrieve an employees submitted reports by their employee id by a specific date range.
 	@GetMapping("/employee/{emp_psid}/{startDate}/{endDate}")
 	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable ("emp_psid") int emp_psid,@PathVariable ("startDate") Date startDate,@PathVariable ("endDate") Date endDate){
@@ -34,9 +33,11 @@ public class EmployeeController {
 				
 	//Method that allows an employee to submit their daily status report.
 	@PostMapping("/employee/createDSR")
-	public void createDSR(@RequestBody Report report) {
+	public String createDSR(@RequestBody Report report) {
 					 
-		 this.reportService.createDSR(report);
+		this.reportService.createDSR(report);
+		 
+		return "Report Has Been Successfully Created & Submited.";
 		
 	}
 	
