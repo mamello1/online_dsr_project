@@ -1,33 +1,47 @@
 package com.m3support.demo.controller;
 
-/*import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import java.time.LocalTime;
+
+import javax.mail.MessagingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.m3support.demo.entity.SMTPMailSender;
+
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class HomeController {
-
+	
+	
+	//Method that sends an email notification to the user about submitting their daily status report.
 	@Autowired
- 	@PreAuthorize("hasRole('users')")
- 	@RequestMapping("/")
- 	public String helloUser() {
+	private SMTPMailSender smtpMailSender;
+	
+	LocalTime alertTime = LocalTime.of(10, 49);
+	LocalTime alertTerminationTime = LocalTime.of(10, 50);
+	@Scheduled(fixedRate = 40000)
+	public void ScheduledMailSender() throws MessagingException{
 		
-		return "Hello Member Of Group Users";
-				
+		if(LocalTime.now().isAfter(alertTime) && LocalTime.now().isBefore(alertTerminationTime)) {
+			
+			sendMail();
+			System.out.println("Email Reminder Has Been Sent.");
+		}
 	}
-		
-	@Autowired
- 	@PreAuthorize("hasRole('manager')")
- 	@RequestMapping("/manager")
- 	public String helloManager() {
-		
-		return "Hello Member Of Group Manager";
-				
-	}
-}*/
+	
 
-public class HomeController{
+	@RequestMapping("/send-mail")
+	public void sendMail() throws MessagingException {
+		
+		smtpMailSender.send("mamellomitane01@outlook.com", "DSR Daily Notification", "Greetings Titan,please send your DSR to your reporting manager");
+		
+	}
 	
 }
+

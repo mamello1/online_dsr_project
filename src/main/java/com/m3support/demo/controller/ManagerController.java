@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import com.m3support.demo.service.ProjectService;
 import com.m3support.demo.service.ReportService;
 
 
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class ManagerController {
@@ -35,8 +36,8 @@ public class ManagerController {
 	    
 	}
 		
-	//Method that returns all projects.
-	@GetMapping("/manager")
+	//Method that allows the manager to retrieve/view all projects.
+	@GetMapping("/manager/viewProjects")
 	public List<Project> getAllProjects(){
 			
 		return projectService.getAllProjects();
@@ -58,5 +59,23 @@ public class ManagerController {
 		return reportService.getEmploeyeeDSRUnderProjects(project_id);
 		
 	}
+	
+	
+	//Method to retrieve an employees submitted reports by their employee id.
+	@GetMapping("/manager/{emp_psid}/{startDate}/{endDate}")
+	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable ("emp_psid") int emp_psid,@PathVariable ("startDate") Date startDate,@PathVariable ("endDate") Date endDate){
+				 
+		return reportService.getDSROfSpecificEmployeeByDateRange(emp_psid,startDate,endDate);
+			
+	}
+	
+	//Method to for a manager to retrieve a specific employees submitted reports by their employee id.
+	@GetMapping("/manager/{emp_psid}")
+	public List<Report> getDSROfSpecificEmployee(@PathVariable int emp_psid){
+				 
+			return reportService.getDSROfSpecificEmployee(emp_psid);
+			
+	}
+		
 
 }

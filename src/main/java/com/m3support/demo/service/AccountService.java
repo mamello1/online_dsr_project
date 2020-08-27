@@ -12,4 +12,6 @@ public interface AccountService {
 	
 	//Method to retrieve all accounts.
 	List<Account> getAllAccounts();
+	
+	
 }

@@ -26,7 +26,7 @@ public class ReportServiceImplementation implements ReportService{
 	@Autowired
 	ReportRepository reportRepository;
 	
-	
+		
 	//Method to retrieve all employees submitted reports.
 	@Override
 	public List<Report> getAllDSRReports(){
@@ -54,19 +54,23 @@ public class ReportServiceImplementation implements ReportService{
 	//Method that allows an employee to submit their daily report.
 	@Override
 	public void createDSR(Report report) {
+		
+		report.setAccount_id(report.getAccount_id());
+		report.setEmp_psid(report.getEmp_psid());
+		report.setProject_id(report.getProject_id());
 			 
 		 this.reportRepository.save(report);
 		 
 	}
 	
-	//Method that allows a manager to generate a report.
+	//Method that allows a manager to generate a PDF report.
 	public String generateDSRReport(Date currentDate) throws Exception {
 		
 		List<Report> generateDSRReport = reportRepository.generateDSRReport(currentDate);
 		
 		Document document = new Document(PageSize.A4);
 		
-		String fileLocation = "dsr_report.pdf";
+		String fileLocation = "C:\\Users\\Mamello Mitane\\Desktop\\ITC_Daily_Reports\\itc_dsr_report.pdf";
 		
 		PdfWriter.getInstance(document, new FileOutputStream(fileLocation));
 		document.open();
@@ -80,7 +84,6 @@ public class ReportServiceImplementation implements ReportService{
 		addRows(table, generateDSRReport); 
 		document.add(table);
 		
-		Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler" + fileLocation);
 		document.close();
 		
 		return "PDF File Has Successfully Been Extracted and Saved At The Following Location : " + fileLocation;
@@ -131,6 +134,7 @@ public class ReportServiceImplementation implements ReportService{
 		return reportRepository.getEmployeesDSRUnderProjects(project_id);
 			
 	}
-
-	}	
+	
+	
+		}	
 
