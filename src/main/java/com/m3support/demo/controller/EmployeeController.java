@@ -22,14 +22,16 @@ public class EmployeeController {
 	
 	@Autowired
 	ReportService reportService;
-				
+	
 	//Method to retrieve an employees submitted reports by their employee id by a specific date range.
-	@GetMapping("/employee/{emp_psid}/{startDate}/{endDate}")
-	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable ("emp_psid") int emp_psid,@PathVariable ("startDate") Date startDate,@PathVariable ("endDate") Date endDate){
+	@GetMapping("/employee/viewDSR/{emp_id}/{startDate}/{endDate}")
+	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable ("emp_id") int emp_id, @PathVariable ("startDate") Date startDate, @PathVariable ("endDate") Date endDate){
 				 
-		return reportService.getDSROfSpecificEmployeeByDateRange(emp_psid,startDate,endDate);
+		 return reportService.getDSROfSpecificEmployeeByDateRange(emp_id,startDate,endDate);
 			
 	}
+	
+
 				
 	//Method that allows an employee to submit their daily status report.
 	@PostMapping("/employee/createDSR")
@@ -37,9 +39,9 @@ public class EmployeeController {
 					 
 		this.reportService.createDSR(report);
 		 
-		return "Report Has Been Successfully Created & Submited.";
+		return "Report Has Been Successfully Created & Submitted.";
 		
 	}
-	
-
+		
+		
 }

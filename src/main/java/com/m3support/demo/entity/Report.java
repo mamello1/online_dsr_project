@@ -1,5 +1,7 @@
 package com.m3support.demo.entity;
 
+
+
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -9,6 +11,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "report_transactional")
@@ -27,8 +30,8 @@ public class Report {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "emp_psid" ,referencedColumnName = "emp_psid")
-	private Employee emp_psid;
+	@JoinColumn(name = "emp_id" ,referencedColumnName = "emp_id")
+	private Employee emp_id;
 	
 	@Column(name = "task_completed")
 	private String task_completed;
@@ -41,25 +44,23 @@ public class Report {
 	
 	@Id
 	@Column(name = "submission_date")
+	//@JsonFormat(pattern="yyyy-MM-dd")
 	private Date submission_date;
 	
 	public Report() {
 		
 	}
 
-	public Report(Account account_id, Project project_id, Employee emp_psid, String task_completed, String task_planned,
-			String task_issues, Date submission_date) {
-		
+	public Report(Account account_id, Project project_id, Employee emp_id, String task_completed, String task_planned,String task_issues, Date submission_date) {
 		this.account_id = account_id;
 		this.project_id = project_id;
-		this.emp_psid = emp_psid;
+		this.emp_id = emp_id;
 		this.task_completed = task_completed;
 		this.task_planned = task_planned;
 		this.task_issues = task_issues;
 		this.submission_date = submission_date;
 	}
-	
-	
+
 
 	public Account getAccount_id() {
 		return account_id;
@@ -76,13 +77,14 @@ public class Report {
 	public void setProject_id(Project project_id) {
 		this.project_id = project_id;
 	}
+	
 
-	public Employee getEmp_psid() {
-		return emp_psid;
+	public Employee getEmp_id() {
+		return emp_id;
 	}
 
-	public void setEmp_psid(Employee emp_psid) {
-		this.emp_psid = emp_psid;
+	public void setEmp_id(Employee emp_id) {
+		this.emp_id = emp_id;
 	}
 
 	public String getTask_completed() {
@@ -119,10 +121,12 @@ public class Report {
 
 	@Override
 	public String toString() {
-		return "Report [account_id=" + account_id + ", project_id=" + project_id + ", emp_psid=" + emp_psid
+		return "Report [account_id=" + account_id + ", project_id=" + project_id + ", emp_id=" + emp_id
 				+ ", task_completed=" + task_completed + ", task_planned=" + task_planned + ", task_issues="
 				+ task_issues + ", submission_date=" + submission_date + "]";
 	}
+
+	
 	
 	
 			

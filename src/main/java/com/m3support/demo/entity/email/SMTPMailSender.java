@@ -1,4 +1,4 @@
-package com.m3support.demo.entity;
+package com.m3support.demo.entity.email;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

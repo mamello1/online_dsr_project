@@ -36,17 +36,17 @@ public class ReportServiceImplementation implements ReportService{
 		
 	//Method to retrieve an employees submitted reports by their psid.
 	 @Override
-	 public List<Report> getDSROfSpecificEmployee(@PathVariable int emp_psid){
+	 public List<Report> getDSROfSpecificEmployee(@PathVariable int emp_id){
 		 
-		 return reportRepository.getDSROfSpecificEmployee(emp_psid);
+		 return reportRepository.getDSROfSpecificEmployee(emp_id);
 	 }
 	 
 	 
 	//Method to retrieve an employees submitted reports by their psid and specific range.
 	@Override
-	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable int emp_psid,Date startDate,Date endDate){
-			 
-		return reportRepository.getDSROfSpecificEmployeeByDateRange(emp_psid,startDate,endDate);
+	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable int emp_id,Date startDate,Date endDate){
+	
+		return reportRepository.findBySpecificEmployeeByDateRange(emp_id, startDate, endDate);
 		
 	}
 	 	 
@@ -117,8 +117,8 @@ public class ReportServiceImplementation implements ReportService{
 	for(int i = 0 ; i < generateDSRReport.size(); i++)
 		
 	{
-		table.addCell(Integer.toString(generateDSRReport.get(i).getEmp_psid().getEmp_psid()));
-		table.addCell(generateDSRReport.get(i).getEmp_psid().getEmp_firstname());
+		table.addCell(Integer.toString(generateDSRReport.get(i).getEmp_id().getEmp_psid()));
+		table.addCell(generateDSRReport.get(i).getEmp_id().getEmp_firstname());
 		table.addCell(generateDSRReport.get(i).getTask_completed());
 		table.addCell(generateDSRReport.get(i).getTask_planned());
 		table.addCell(generateDSRReport.get(i).getTask_issues());	
@@ -128,7 +128,7 @@ public class ReportServiceImplementation implements ReportService{
 	
 	
 	@Override
-	public List<Report> getEmploeyeeDSRUnderProjects(int project_id) {
+	public List<Report> getEmployeeDSRUnderProjects(int project_id) {
 		
 		return reportRepository.getEmployeesDSRUnderProjects(project_id);
 			

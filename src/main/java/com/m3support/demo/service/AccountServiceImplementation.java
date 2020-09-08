@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
+import com.m3support.demo.dtos.AccountDto;
+import com.m3support.demo.dtos.AccountIdDto;
 import com.m3support.demo.entity.Account;
 import com.m3support.demo.repositories.AccountRepository;
 
@@ -17,21 +16,39 @@ public class AccountServiceImplementation  implements AccountService{
 	AccountRepository accountRepository;
 
 	
-	//Method that allows an employee to submit their daily report.
+	//Method used to create an account.
 	@Override
-	@PostMapping("/admin")
 	public void createAccount(Account account) {
 				 
 		this.accountRepository.save(account);
 			 
 	}
-		
-	//Method to retrieve all employees submitted reports.
+	
+	//Method used to update an account.
 	@Override
-	@GetMapping("/admin")
+	public void updateAccount(Account account) {
+		this.accountRepository.save(account);
+	}
+		
+	//Method to retrieve all accounts.
+	@Override
 	public List<Account> getAllAccounts(){
 			
 			return accountRepository.findAll();
 	}
 	
+	//Method used to retrieve account dashboard details.
+	@Override
+	public List<AccountDto> getAccountsDashboard() {
+		
+		return accountRepository.getAccountDashboard();
+	}
+	
+	//Method used to retrieve account identifier details
+	@Override
+	public List<AccountIdDto> getAccountsForProjects() {
+		
+		return accountRepository.getAccountsForProjects();
+	}
+
 }

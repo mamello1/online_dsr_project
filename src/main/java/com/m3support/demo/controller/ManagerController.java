@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.m3support.demo.entity.Project;
 import com.m3support.demo.entity.Report;
+import com.m3support.demo.service.AccountService;
 import com.m3support.demo.service.ProjectService;
 import com.m3support.demo.service.ReportService;
 
@@ -26,6 +27,9 @@ public class ManagerController {
 	
 	@Autowired
 	ProjectService projectService;
+	
+	@Autowired
+	AccountService accountService;
 	
 	
 	//Methods used by manager to generate a PDF report.
@@ -56,26 +60,28 @@ public class ManagerController {
 	@GetMapping("/manager/viewEmployeesUnderProject/{project_id}")
 	public List<Report> getEmployeesDSRUnderProject(@PathVariable int project_id){
 		
-		return reportService.getEmploeyeeDSRUnderProjects(project_id);
+		return reportService.getEmployeeDSRUnderProjects(project_id);
 		
 	}
 	
 	
 	//Method to retrieve an employees submitted reports by their employee id.
-	@GetMapping("/manager/{emp_psid}/{startDate}/{endDate}")
-	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable ("emp_psid") int emp_psid,@PathVariable ("startDate") Date startDate,@PathVariable ("endDate") Date endDate){
+	@GetMapping("/manager/{emp_id}/{startDate}/{endDate}")
+	public List<Report> getDSROfSpecificEmployeeByDateRange(@PathVariable ("emp_id") int emp_id,@PathVariable ("startDate") Date startDate,@PathVariable ("endDate") Date endDate){
 				 
-		return reportService.getDSROfSpecificEmployeeByDateRange(emp_psid,startDate,endDate);
+		return reportService.getDSROfSpecificEmployeeByDateRange(emp_id,startDate,endDate);
 			
 	}
 	
 	//Method to for a manager to retrieve a specific employees submitted reports by their employee id.
-	@GetMapping("/manager/{emp_psid}")
-	public List<Report> getDSROfSpecificEmployee(@PathVariable int emp_psid){
+	@GetMapping("/manager/{emp_id}")
+	public List<Report> getDSROfSpecificEmployee(@PathVariable int emp_id){
 				 
-			return reportService.getDSROfSpecificEmployee(emp_psid);
+			return reportService.getDSROfSpecificEmployee(emp_id);
 			
 	}
+	
+
 		
 
 }

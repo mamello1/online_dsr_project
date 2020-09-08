@@ -11,23 +11,23 @@ public class ReportId implements Serializable{
 	
 	private Date submission_date;
 	private int project_id;
-	private int emp_psid;
+	private int emp_id;
 	
 	public ReportId() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReportId(Date submission_date, int project_id, int emp_psid) {
+	public ReportId(Date submission_date, int project_id, int emp_id) {
 		this.submission_date = submission_date;
 		this.project_id = project_id;
-		this.emp_psid = emp_psid;
+		this.emp_id = emp_id;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + emp_psid;
+		result = prime * result + emp_id;
 		result = prime * result + project_id;
 		result = prime * result + ((submission_date == null) ? 0 : submission_date.hashCode());
 		return result;
@@ -42,7 +42,7 @@ public class ReportId implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ReportId other = (ReportId) obj;
-		if (emp_psid != other.emp_psid)
+		if (emp_id != other.emp_id)
 			return false;
 		if (project_id != other.project_id)
 			return false;

@@ -19,8 +19,8 @@ public class AccountProjectEmployee {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "emp_psid",referencedColumnName = "emp_psid")
-	private Employee emp_psid;
+	@JoinColumn(name = "emp_id",referencedColumnName = "emp_id")
+	private Employee emp_id;
 	
 	@Id
 	@ManyToOne

@@ -3,6 +3,8 @@
 package com.m3support.demo.entity;
 
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,11 +30,27 @@ public class Project {
 
 	@Column(name = "reporting_manager")
 	private String reporting_manager;
-	
+		
 	
 	@ManyToOne
 	@JoinColumn(name = "account_id", referencedColumnName = "account_id")
 	private Account account_master;
+	
+	@Column(name = "deleted")
+	private boolean deleted = false;
+
+	@Column(name = "created_on")
+	private Date created_on;
+
+	@Column(name = "created_by")
+	private String created_by;
+
+	@Column(name = "modified_on")
+	private Date modified_on;
+
+	@Column(name = "modified_by")
+	private String modified_by;
+
 	
 	
 	//Account default constructor
@@ -40,14 +58,18 @@ public class Project {
 		
 	}
 
-
-	public Project(int project_id, String project_desc,String reporting_manager) {
+	public Project(int project_id, String project_desc, String reporting_manager, Account account_master,
+			boolean deleted, Date created_on, String created_by, Date modified_on, String modified_by) {
 		this.project_id = project_id;
 		this.project_desc = project_desc;
 		this.reporting_manager = reporting_manager;
-
+		this.account_master = account_master;
+		this.deleted = deleted;
+		this.created_on = created_on;
+		this.created_by = created_by;
+		this.modified_on = modified_on;
+		this.modified_by = modified_by;
 	}
-
 
 	public int getProject_id() {
 		return project_id;
@@ -76,10 +98,70 @@ public class Project {
 		this.reporting_manager = reporting_manager;
 	}
 	
+	
+	
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public Date getCreated_on() {
+		return created_on;
+	}
+
+	public void setCreated_on(Date created_on) {
+		this.created_on = created_on;
+	}
+
+	public String getCreated_by() {
+		return created_by;
+	}
+
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
+
+	public Date getModified_on() {
+		return modified_on;
+	}
+
+	public void setModified_on(Date modified_on) {
+		this.modified_on = modified_on;
+	}
+
+	public String getModified_by() {
+		return modified_by;
+	}
+
+	public void setModified_by(String modified_by) {
+		this.modified_by = modified_by;
+	}
+	
+
+	public Account getAccount_master() {
+		return account_master;
+	}
+
+	public void setAccount_master(Account account_master) {
+		
+		this.account_master = account_master;
+	}
+
 	@Override
 	public String toString() {
-		return "Project [project_id=" + project_id + ", project_desc=" + project_desc + ",reporting_manager=" + reporting_manager + "]";
+		return "Project [project_id=" + project_id + ", project_desc=" + project_desc + ", reporting_manager="
+				+ reporting_manager + ", account_master=" + account_master + ", deleted=" + deleted + ", created_on="
+				+ created_on + ", created_by=" + created_by + ", modified_on=" + modified_on + ", modified_by="
+				+ modified_by + "]";
 	}
+
+	
+	
+	
 	
 	
 }
